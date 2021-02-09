@@ -17,7 +17,17 @@ public class BookTests {
     }
 
     @Test
-    public void getBookSummary() {
+    public void getBookSummaryOnlyWithTitle() {
+        book = new Book("title");
+
+        assertEquals(
+                "Book title",
+                book.getSummary()
+        );
+    }
+
+    @Test
+    public void getBookSummaryWithAllFields() {
         ArrayList<String> authorsList = new ArrayList<String>();
         authorsList.add("author1");
         authorsList.add("author2");

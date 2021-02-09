@@ -23,7 +23,7 @@ public class Book {
 
         summaryString = summaryString + title;
 
-        if (authors.size() > 0 ) {
+        if (authors != null) {
             summaryString = summaryString + " of ";
             for ( Iterator<String> listOfAuthors = authors.iterator(); listOfAuthors.hasNext(); ) {
                 String author = listOfAuthors.next();
@@ -35,7 +35,7 @@ public class Book {
             }
         }
 
-        if (yearPublished != "") {
+        if (yearPublished != null) {
             summaryString = summaryString + " published on " + yearPublished;
         }
 
