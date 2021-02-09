@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class WelcomeMessageTest {
 
@@ -20,11 +21,10 @@ public class WelcomeMessageTest {
 
         welcomeMessage = new WelcomeMessage();
         welcomeMessage.print();
-        assertEquals(
 
-                "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n",
-                outputConsoleStream.toString()
+        assertThat(
+                outputConsoleStream.toString(),
+                is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n")
         );
-
     }
 }
