@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class WelcomeMessageTest {
+public class WelcomeMessageTests {
 
     private ByteArrayOutputStream outputConsoleStream;
     private WelcomeMessage welcomeMessage;

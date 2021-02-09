@@ -13,9 +13,12 @@ public class BibliotecaApp {
         WelcomeMessage welcomeUserMessage = new WelcomeMessage();
         welcomeUserMessage.print();
 
-        ArrayList<Book> bookList = createBookList();
-        Printer printer = new Printer();
-        printer.printBookListAsTable(bookList);
+//        ArrayList<Book> bookList = createBookList();
+//        Printer printer = new Printer();
+//        printer.printBookListAsTable(bookList);
+
+        Menu appMenu = new Menu();
+        appMenu.show();
     }
 
     private ArrayList<Book> createBookList() {
