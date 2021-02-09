@@ -26,7 +26,7 @@ public class BookTests {
 
         assertEquals(
                 // "Book title of author1, author2 published on 2001\n",
-                "Book title published on 2001",
+                "Book title of author1 published on 2001",
                 book.getSummary()
         );
     }

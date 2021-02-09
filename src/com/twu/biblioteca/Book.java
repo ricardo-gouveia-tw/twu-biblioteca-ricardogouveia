@@ -22,9 +22,13 @@ public class Book {
 
         summaryString = summaryString + title;
 
-         if (yearPublished != "") {
-             summaryString = summaryString + " published on " + yearPublished;
-         }
+        if (authors.size() > 0 ) {
+            summaryString = summaryString + " of " + authors.get(0);
+        }
+
+        if (yearPublished != "") {
+            summaryString = summaryString + " published on " + yearPublished;
+        }
 
         return summaryString;
     }
