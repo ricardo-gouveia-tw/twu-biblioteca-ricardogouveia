@@ -15,7 +15,7 @@ public class BibliotecaApp {
 
         ArrayList<Book> bookList = createBookList();
         Printer printer = new Printer();
-        printer.printBookList(bookList);
+        printer.printBookListAsTable(bookList);
     }
 
     private ArrayList<Book> createBookList() {

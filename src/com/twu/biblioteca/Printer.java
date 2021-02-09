@@ -14,14 +14,18 @@ public class Printer {
     }
 
     public void printBookListAsTable(ArrayList<Book> bookList) {
-        System.out.println("-----------------------------------------------------------------------------");
-        System.out.printf("%7s %30s %30s", "TITLE", "AUTHOR(S)", "YEAR OF PUBLICATION");
+        String separatorDashes = "-----------------------------------------------------------------------------------------------------------";
+
+        System.out.println(separatorDashes);
+        System.out.println("\n Listing all books in Library:");
+        System.out.println(separatorDashes);
+        System.out.printf("%35s %45s %25s", "TITLE", "AUTHOR(S)", "YEAR OF PUBLICATION");
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println(separatorDashes);
 
         for (Book book: bookList) {
             System.out.format(
-                    "%7s %30s %30s",
+                    "%35s %45s %25s",
                     book.getTitle(),
                     book.getAllAuthorsString(),
                     book.getYearPublished()
@@ -29,6 +33,6 @@ public class Printer {
             System.out.println();
         }
 
-        System.out.println("-----------------------------------------------------------------------------");
-    }
+        System.out.println(separatorDashes);    }
+
 }

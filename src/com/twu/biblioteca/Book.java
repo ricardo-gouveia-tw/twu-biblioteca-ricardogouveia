@@ -47,21 +47,25 @@ public class Book {
     }
 
     public String getYearPublished() {
-        return yearPublished;
+        if (yearPublished != null) {
+            return yearPublished;
+        } else { return ""; }
     }
 
     private String returnAllAuthorsString(ArrayList<String> authorsList) {
         String authorsListString = "";
 
-        for ( Iterator<String> listOfAuthors = authorsList.iterator(); listOfAuthors.hasNext(); ) {
-            String author = listOfAuthors.next();
-            authorsListString = authorsListString + author;
+        if (authorsList != null) {
+            for ( Iterator<String> listOfAuthors = authorsList.iterator(); listOfAuthors.hasNext(); ) {
+                String author = listOfAuthors.next();
+                authorsListString = authorsListString + author;
 
-            if (listOfAuthors.hasNext()) {
-                authorsListString = authorsListString + ", ";
+                if (listOfAuthors.hasNext()) {
+                    authorsListString = authorsListString + ", ";
+                }
             }
-        }
 
-        return authorsListString;
+            return authorsListString;
+        } else { return ""; }
     }
 }
