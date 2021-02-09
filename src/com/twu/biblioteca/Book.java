@@ -24,7 +24,7 @@ public class Book {
         summaryString = summaryString + title;
 
         if (authors != null) {
-            summaryString = summaryString + returnAllAuthorsString(authors);
+            summaryString = summaryString + " of " + returnAllAuthorsString(authors);
         }
 
         if (yearPublished != null) {
@@ -38,8 +38,20 @@ public class Book {
         return title;
     }
 
+    public ArrayList<String> getAuthorsList() {
+        return authors;
+    }
+
+    public String getAllAuthorsString() {
+        return returnAllAuthorsString(getAuthorsList());
+    }
+
+    public String getYearPublished() {
+        return yearPublished;
+    }
+
     private String returnAllAuthorsString(ArrayList<String> authorsList) {
-        String authorsListString = " of ";
+        String authorsListString = "";
 
         for ( Iterator<String> listOfAuthors = authorsList.iterator(); listOfAuthors.hasNext(); ) {
             String author = listOfAuthors.next();
