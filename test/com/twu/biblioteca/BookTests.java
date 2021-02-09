@@ -19,14 +19,14 @@ public class BookTests {
     @Test
     public void getBookSummary() {
         ArrayList<String> authorsList = new ArrayList<String>();
-        authorsList.add("author 1");
-        authorsList.add("author 2");
+        authorsList.add("author1");
+        authorsList.add("author2");
 
         book = new Book("title", authorsList, "2001");
 
         assertEquals(
                 // "Book title of author1, author2 published on 2001\n",
-                "Book title of author1 published on 2001",
+                "Book title of author1, author2 published on 2001",
                 book.getSummary()
         );
     }

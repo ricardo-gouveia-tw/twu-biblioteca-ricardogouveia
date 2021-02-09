@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Book {
     private String title;
@@ -23,7 +24,15 @@ public class Book {
         summaryString = summaryString + title;
 
         if (authors.size() > 0 ) {
-            summaryString = summaryString + " of " + authors.get(0);
+            summaryString = summaryString + " of ";
+            for ( Iterator<String> listOfAuthors = authors.iterator(); listOfAuthors.hasNext(); ) {
+                String author = listOfAuthors.next();
+                summaryString = summaryString + author;
+
+                if (listOfAuthors.hasNext()) {
+                    summaryString = summaryString + ", ";
+                }
+            }
         }
 
         if (yearPublished != "") {
