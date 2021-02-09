@@ -46,6 +46,9 @@ public class PrinterTests {
         ArrayList<Book> bookList = new ArrayList<Book>();
         bookList.add(testBook);
 
+        Book testBook2 = new Book("Test Book 2");
+        bookList.add(testBook2);
+
         Printer printer = new Printer();
         printer.printBookListAsTable(bookList);
 
@@ -53,7 +56,8 @@ public class PrinterTests {
                 containsString("Test Book"),
                 containsString("author1"),
                 containsString("author2"),
-                containsString("2000")
+                containsString("2000"),
+                containsString("Test Book 2")
         ));
     }
 }
