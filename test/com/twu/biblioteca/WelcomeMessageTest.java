@@ -22,7 +22,7 @@ public class WelcomeMessageTest {
         welcomeMessage.print();
         assertEquals(
 
-                "Welcome to Bangalore Public Library Management System!\n",
+                "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n",
                 outputConsoleStream.toString()
         );
 
