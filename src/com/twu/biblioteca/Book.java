@@ -7,31 +7,18 @@ public class Book {
     private String title;
     private ArrayList<String> authors;
     private String yearPublished;
+    private String status;
 
     public Book(String title) {
         this.title = title;
+        this.status = "available";
     }
 
     public Book(String title, ArrayList<String> authors, String yearPublished) {
         this.title = title;
         this.authors = authors;
         this.yearPublished = yearPublished;
-    }
-
-    public String getSummary() {
-        String summaryString = "Book ";
-
-        summaryString = summaryString + title;
-
-        if (authors != null) {
-            summaryString = summaryString + " of " + returnAllAuthorsString(authors);
-        }
-
-        if (yearPublished != null) {
-            summaryString = summaryString + " published on " + yearPublished;
-        }
-
-        return summaryString;
+        this.status = "available";
     }
 
     public String getTitle() {
@@ -42,21 +29,27 @@ public class Book {
         return authors;
     }
 
-    public String getAllAuthorsString() {
-        return returnAllAuthorsString(getAuthorsList());
-    }
-
     public String getYearPublished() {
         if (yearPublished != null) {
             return yearPublished;
         } else { return ""; }
     }
 
-    private String returnAllAuthorsString(ArrayList<String> authorsList) {
+    public String getStatus() {
+        return status;
+    }
+
+    public String setStatus(String newStatus) {
+        String oldStatus = getStatus();
+        status = newStatus;
+        return "Book " + getTitle() + " was " + oldStatus + " now is " + getStatus();
+    }
+
+    public String getAllAuthorsString() {
         String authorsListString = "";
 
-        if (authorsList != null) {
-            for ( Iterator<String> listOfAuthors = authorsList.iterator(); listOfAuthors.hasNext(); ) {
+        if (authors != null) {
+            for ( Iterator<String> listOfAuthors = authors.iterator(); listOfAuthors.hasNext(); ) {
                 String author = listOfAuthors.next();
                 authorsListString = authorsListString + author;
 

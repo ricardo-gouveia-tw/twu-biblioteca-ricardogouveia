@@ -44,22 +44,17 @@ public class BookTests {
     }
 
     @Test
-    public void getBookSummaryOnlyWithTitle() {
-        book = new Book("title");
+    public void getBookStatus() {
+        Book book = new Book("title");
 
-        assertThat( book.getSummary(), is("Book title") );
+        assertThat(book.getStatus(), is("available"));
     }
 
     @Test
-    public void getBookSummaryWithAllFields() {
-        ArrayList<String> authorsList = new ArrayList<String>();
-        authorsList.add("author1");
-        authorsList.add("author2");
+    public void setBookStatus() {
+        Book book = new Book("title");
+        book.setStatus("checkedOut");
 
-        book = new Book("title", authorsList, "2001");
-
-        assertThat(
-                book.getSummary(), is("Book title of author1, author2 published on 2001")
-        );
+        assertThat(book.getStatus(), is("checkedOut"));
     }
 }
