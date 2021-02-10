@@ -13,12 +13,23 @@ public class BibliotecaApp {
         WelcomeMessage welcomeUserMessage = new WelcomeMessage();
         welcomeUserMessage.print();
 
-//        ArrayList<Book> bookList = createBookList();
-//        Printer printer = new Printer();
-//        printer.printBookListAsTable(bookList);
+        ArrayList<Book> bookList = createBookList();
+        Printer printer = new Printer();
 
         Menu appMenu = new Menu();
-        appMenu.show();
+        appMenu.showOptions();
+
+
+        switch (appMenu.getUserOption()) {
+            case "01":
+                printer.printBookListAsTable(bookList);
+                break;
+
+            case "99":
+            case "00":
+            default:
+                break;
+        }
     }
 
     private ArrayList<Book> createBookList() {
