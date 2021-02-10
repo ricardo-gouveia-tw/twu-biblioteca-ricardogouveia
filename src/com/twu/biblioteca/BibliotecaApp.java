@@ -9,7 +9,7 @@ public class BibliotecaApp {
         appInstance.run();
     }
 
-    public void run() {
+    private void run() {
         WelcomeMessage welcomeUserMessage = new WelcomeMessage();
         welcomeUserMessage.print();
 
@@ -19,17 +19,18 @@ public class BibliotecaApp {
         Menu appMenu = new Menu();
         appMenu.showOptions();
 
+        do {
+            switch (appMenu.getUserOption()) {
+                case "01":
+                    printer.printBookListAsTable(bookList);
+                    break;
 
-        switch (appMenu.getUserOption()) {
-            case "01":
-                printer.printBookListAsTable(bookList);
-                break;
-
-            case "99":
-            case "00":
-            default:
-                break;
-        }
+                case "99":
+                case "00":
+                default:
+                    break;
+            }
+        } while (appMenu.getUserOption() != "99");
     }
 
     private ArrayList<Book> createBookList() {
@@ -68,5 +69,4 @@ public class BibliotecaApp {
 
         return bookList;
     }
-
 }
