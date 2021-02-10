@@ -24,13 +24,15 @@ public class Printer {
         System.out.println(separatorDashes);
 
         for (Book book: bookList) {
-            System.out.format(
-                    "%35s %45s %25s",
-                    book.getTitle(),
-                    book.getAllAuthorsString(),
-                    book.getYearPublished()
-            );
-            System.out.println();
+            if ( book.getStatus() == "available" ) {
+                System.out.format(
+                        "%35s %45s %25s",
+                        book.getTitle(),
+                        book.getAllAuthorsString(),
+                        book.getYearPublished()
+                );
+                System.out.println();
+            }
         }
 
         System.out.println(separatorDashes);    }
