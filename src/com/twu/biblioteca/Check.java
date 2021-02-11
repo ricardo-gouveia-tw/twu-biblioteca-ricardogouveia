@@ -19,6 +19,7 @@ public class Check {
         SearchResponse searchResponse = search.searchByTitle(bookList, bookTitle);
 
         if (searchResponse.getSearchSuccess() == true && checkIfAvailableBook(searchResponse.getBook())) {
+
             Book bookFound = changeBookStatus(
                     searchResponse.getBook(),
                     operationType
@@ -29,11 +30,10 @@ public class Check {
                 if (book.getTitle() == bookTitle) { book = bookFound; }
             }
 
-            CheckResult checkResult = new CheckResult(true, newBookList);
+            CheckResult checkResult = new CheckResult(true, newBookList, operationType);
             return checkResult;
         } else {
-            CheckResult checkResult = new CheckResult(false, bookList);
-            //System.out.println(checkResult.getCheckSuccess() + checkResult.getResultString());
+            CheckResult checkResult = new CheckResult(false, bookList, operationType);
             return checkResult;
         }
     }
@@ -60,8 +60,10 @@ class CheckResult {
     private Boolean checkSuccess = false;
     private ArrayList bookList;
     private String resultString;
+    private String operationType;
 
-    public CheckResult(Boolean checkSuccess, ArrayList<Book> bookList) {
+    public CheckResult(Boolean checkSuccess, ArrayList<Book> bookList, String operationType) {
+        this.operationType = operationType;
         this.bookList = bookList;
         this.checkSuccess = checkSuccess;
         setResultString();
@@ -84,15 +86,26 @@ class CheckResult {
         setResultString();
     }
 
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
+
     public String getResultString() {
         return resultString;
     }
 
     private void setResultString() {
-        if (checkSuccess == true) {
-            resultString = "Thank you! Enjoy the book";
+        if (operationType == "out") {
+            if (checkSuccess == true) { resultString = "Thank you! Enjoy the book"; }
+            else { resultString = "Sorry, that book is not available"; }
+        } else if (operationType == "in") {
+            if (checkSuccess == true) { resultString = "Thank you for returning the book"; }
+            else { resultString = "That is not a valid book to return."; }
         }
-        else { resultString = "Sorry, that book is not available"; }
     }
 }
 
