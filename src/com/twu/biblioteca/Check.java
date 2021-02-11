@@ -13,7 +13,7 @@ public class Check {
         Search search = new Search();
         SearchResponse searchResponse = search.searchByTitle(bookList, bookTitle);
 
-        if (searchResponse.getSearchSuccess() == true) {
+        if (searchResponse.getSearchSuccess() == true && checkIfAvailableBook(searchResponse.getBook())) {
             Book bookFound = changeBookStatus(
                     searchResponse.getBook(),
                     operationType
@@ -28,6 +28,7 @@ public class Check {
             return checkResult;
         } else {
             CheckResult checkResult = new CheckResult(false, bookList);
+            //System.out.println(checkResult.getCheckSuccess() + checkResult.getResultString());
             return checkResult;
         }
     }
@@ -44,15 +45,21 @@ public class Check {
                 return book;
         }
     }
+
+    private Boolean checkIfAvailableBook(Book book) {
+        return book.getStatus() == "available";
+    }
 }
 
 class CheckResult {
     private Boolean checkSuccess = false;
     private ArrayList bookList;
+    private String resultString;
 
     public CheckResult(Boolean checkSuccess, ArrayList<Book> bookList) {
         this.bookList = bookList;
         this.checkSuccess = checkSuccess;
+        setResultString();
     }
 
     public ArrayList getBookList() {
@@ -69,6 +76,18 @@ class CheckResult {
 
     public void setCheckSuccess(Boolean checkSuccess) {
         this.checkSuccess = checkSuccess;
+        setResultString();
+    }
+
+    public String getResultString() {
+        return resultString;
+    }
+
+    private void setResultString() {
+        if (checkSuccess == true) {
+            resultString = "Thank you! Enjoy the book";
+        }
+        else { resultString = "Sorry, that book is not available"; }
     }
 }
 

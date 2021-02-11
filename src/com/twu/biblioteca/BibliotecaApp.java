@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
@@ -18,19 +19,43 @@ public class BibliotecaApp {
 
         Menu appMenu = new Menu();
         appMenu.showOptions();
+        String lastChoosenOption = "";
 
         do {
             switch (appMenu.getUserOption()) {
                 case "01":
+                    lastChoosenOption = "01";
                     printer.printBookListAsTable(bookList);
                     break;
 
+                case "02":
+                    lastChoosenOption = "02";
+                    bookList = checkBook(bookList, "out");
+                    break;
+
                 case "99":
+                    lastChoosenOption = "99";
+
                 case "00":
                 default:
                     break;
             }
-        } while (appMenu.getUserOption() != "99");
+        } while (lastChoosenOption != "99");
+    }
+
+    private ArrayList<Book> checkBook(ArrayList<Book> bookList, String operationType) {
+        System.out.println("\n ENTER BOOK TITLE: ");
+        Scanner userOptionInput = new Scanner(System.in);
+        String bookSearchString =  userOptionInput.nextLine();
+
+        Check check = new Check(bookList);
+        CheckResult checkResult = check.checkBook(bookSearchString, operationType);
+
+        //debug
+        // System.out.println(checkResult.getCheckSuccess());
+
+        System.out.println(checkResult.getResultString());
+        return checkResult.getBookList();
     }
 
     private ArrayList<Book> createBookList() {

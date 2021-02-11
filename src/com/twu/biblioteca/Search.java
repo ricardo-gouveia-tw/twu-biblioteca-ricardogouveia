@@ -10,7 +10,7 @@ public class Search {
         SearchResponse result = new SearchResponse(false);
 
         for (Book book : bookList) {
-            if (book.getTitle() == searchString) {
+            if ( searchString.contains( book.getTitle() ) ) {
                 result.setSearchSuccess(true);
                 result.setBook(book);
             }
