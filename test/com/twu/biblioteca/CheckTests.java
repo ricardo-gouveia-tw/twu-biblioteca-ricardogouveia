@@ -3,13 +3,20 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.*;
+import static org.hamcrest.core.Is.is;
 
 public class CheckTests {
     private ArrayList<Book> bookList;
+    private ByteArrayOutputStream outputConsoleStream;
+
 
     @Before
     public void beforeEachCheckTest() {
@@ -24,7 +31,15 @@ public class CheckTests {
     @Test
     public void checkBookOnBooklist() {
         Check bookChecker = new Check(bookList);
-        ArrayList<Book> newBookList = bookChecker.checkBook("Test Book", "out").getBookList();
+        outputConsoleStream = new ByteArrayOutputStream();
+        PrintStream consoleOutputPrintStream = new PrintStream(outputConsoleStream);
+        System.setOut(consoleOutputPrintStream);
+
+        InputStream inputStream = System.in;
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Test Book".getBytes(StandardCharsets.UTF_8));
+        System.setIn(optionOne);
+
+        ArrayList<Book> newBookList = bookChecker.checkBook("out").getBookList();
 
         Book bookToTest = new Book("");
         for ( Book book : newBookList ) {
@@ -37,7 +52,15 @@ public class CheckTests {
     @Test
     public void checkBookThatDoesntExistsOnBooklist() {
         Check bookChecker = new Check(bookList);
-        CheckResult checkResult = bookChecker.checkBook("Test Book 2", "out");
+        outputConsoleStream = new ByteArrayOutputStream();
+        PrintStream consoleOutputPrintStream = new PrintStream(outputConsoleStream);
+        System.setOut(consoleOutputPrintStream);
+
+        InputStream inputStream = System.in;
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Tesb Book 2".getBytes(StandardCharsets.UTF_8));
+        System.setIn(optionOne);
+
+        CheckResult checkResult = bookChecker.checkBook("out");
 
         assertThat(checkResult.getCheckSuccess(), is(false));
     }

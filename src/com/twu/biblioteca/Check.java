@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Check {
     private ArrayList<Book> bookList;
@@ -9,7 +10,11 @@ public class Check {
         this.bookList = bookList;
     }
 
-    public CheckResult checkBook(String bookTitle, String operationType) {
+    public CheckResult checkBook(String operationType) {
+        System.out.println("\n ENTER BOOK TITLE: ");
+        Scanner userOptionInput = new Scanner(System.in);
+        String bookTitle =  userOptionInput.nextLine();
+
         Search search = new Search();
         SearchResponse searchResponse = search.searchByTitle(bookList, bookTitle);
 
