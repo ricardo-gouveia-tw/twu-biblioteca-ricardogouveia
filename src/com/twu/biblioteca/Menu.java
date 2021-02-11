@@ -13,6 +13,7 @@ public class Menu {
             dashedSeparator +
             "|  01 - LIST OF BOOKS               |\n" +
             "|  02 - CHECKOUT A BOOK             |\n" +
+            "|  03 - RETURN A BOOK               |\n" +
             "|  99 - QUIT                        |\n" +
             dashedSeparator;
 
@@ -34,6 +35,10 @@ public class Menu {
             case "02":
                 System.out.println("SELECTED: 02 - CHECKOUT A BOOK");
                 return "02";
+
+            case "03":
+                System.out.println("SELECTED: 03 - RETURN A BOOK");
+                return "03";
 
             case "99":
                 System.out.println("SELECTED: 99 - QUIT");

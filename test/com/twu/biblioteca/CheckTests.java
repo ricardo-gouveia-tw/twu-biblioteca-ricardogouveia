@@ -26,8 +26,13 @@ public class CheckTests {
         ArrayList<String> authorList = new ArrayList<String>();
         authorList.add("author1");
         authorList.add("author2");
-        Book testBook = new Book("Test Book 1", authorList, "2000");
-        bookList.add(testBook);
+
+        Book availableTestBook = new Book("Available Test Book", authorList, "2000");
+        bookList.add(availableTestBook);
+
+        Book checkedOutTestBook = new Book("Checked Out Test Book", authorList, "2000");
+        checkedOutTestBook.setStatus("checkedOut");
+        bookList.add(checkedOutTestBook);
 
         bookChecker = new Check(bookList);
         outputConsoleStream = new ByteArrayOutputStream();
@@ -37,8 +42,8 @@ public class CheckTests {
     }
 
     @Test
-    public void checkBookOnBooklist() {
-        ByteArrayInputStream optionOne = new ByteArrayInputStream("Test Book 1".getBytes(StandardCharsets.UTF_8));
+    public void checkOutBookOnBooklist() {
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Available Test Book".getBytes(StandardCharsets.UTF_8));
         System.setIn(optionOne);
 
         CheckResult checkResult = bookChecker.checkBook("out");
@@ -46,7 +51,7 @@ public class CheckTests {
 
         Book bookToTest = new Book("");
         for ( Book book : newBookList ) {
-            if ( book.getTitle() == "Test Book 1" ) { bookToTest = book; }
+            if ( book.getTitle() == "Available Test Book" ) { bookToTest = book; }
         }
 
         assertThat(bookToTest.getStatus(), is("checkedOut"));
@@ -56,7 +61,7 @@ public class CheckTests {
 
     @Test
     public void checkOutBookThatDoesntExistsOnBooklist() {
-        ByteArrayInputStream optionOne = new ByteArrayInputStream("Test Book 2".getBytes(StandardCharsets.UTF_8));
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Non Existing Book".getBytes(StandardCharsets.UTF_8));
         System.setIn(optionOne);
 
         CheckResult checkResult = bookChecker.checkBook("out");
@@ -66,8 +71,8 @@ public class CheckTests {
     }
 
     @Test
-    public void checkBookInBooklist() {
-        ByteArrayInputStream optionOne = new ByteArrayInputStream("Test Book 1".getBytes(StandardCharsets.UTF_8));
+    public void checkInBookOnBooklist() {
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Checked Out Test Book".getBytes(StandardCharsets.UTF_8));
         System.setIn(optionOne);
 
         CheckResult checkResult = bookChecker.checkBook("in");
@@ -75,7 +80,7 @@ public class CheckTests {
 
         Book bookToTest = new Book("");
         for ( Book book : newBookList ) {
-            if ( book.getTitle() == "Test Book 1" ) { bookToTest = book; }
+            if ( book.getTitle() == "Available Test Book" ) { bookToTest = book; }
         }
 
         assertThat(bookToTest.getStatus(), is("available"));
@@ -85,7 +90,7 @@ public class CheckTests {
 
     @Test
     public void checkInBookThatDoesntExistsOnBooklist() {
-        ByteArrayInputStream optionOne = new ByteArrayInputStream("Test Book 2".getBytes(StandardCharsets.UTF_8));
+        ByteArrayInputStream optionOne = new ByteArrayInputStream("Non Existing Book".getBytes(StandardCharsets.UTF_8));
         System.setIn(optionOne);
 
         CheckResult checkResult = bookChecker.checkBook("in");

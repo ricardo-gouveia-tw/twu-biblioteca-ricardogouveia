@@ -26,6 +26,8 @@ public class MenuTests {
                 allOf(
                         containsString("OPTIONS"),
                         containsString("01 - LIST OF BOOKS"),
+                        containsString("02 - CHECKOUT A BOOK"),
+                        containsString("03 - RETURN A BOOK"),
                         containsString("99 - QUIT")
                 )
         );

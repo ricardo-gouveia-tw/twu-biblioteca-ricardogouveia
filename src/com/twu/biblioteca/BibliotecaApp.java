@@ -32,6 +32,11 @@ public class BibliotecaApp {
                     bookList = checkBook(bookList, "out");
                     break;
 
+                case "03":
+                    lastChoosenOption = "03";
+                    bookList = checkBook(bookList, "in");
+                    break;
+
                 case "99":
                     lastChoosenOption = "99";
 

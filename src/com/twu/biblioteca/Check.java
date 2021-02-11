@@ -18,16 +18,23 @@ public class Check {
         Search search = new Search();
         SearchResponse searchResponse = search.searchByTitle(bookList, bookTitle);
 
-        if (searchResponse.getSearchSuccess() == true && checkIfAvailableBook(searchResponse.getBook())) {
+        if (searchResponse.getSearchSuccess() == true) {
+            Book foundBook = searchResponse.getBook();
 
-            Book bookFound = changeBookStatus(
-                    searchResponse.getBook(),
-                    operationType
-            );
+            if (operationType == "out" && checkBookStatus(foundBook, "available")) {
+                foundBook = changeBookStatus( foundBook, operationType );
+
+            } else if (operationType == "in" && checkBookStatus(foundBook, "checkedOut")) {
+                foundBook = changeBookStatus( foundBook, operationType );
+
+            } else {
+                CheckResult checkResult = new CheckResult(false, bookList, operationType);
+                return checkResult;
+            }
 
             ArrayList<Book> newBookList = bookList;
             for (Book book: newBookList) {
-                if (book.getTitle() == bookTitle) { book = bookFound; }
+                if (book.getTitle() == bookTitle) { book = foundBook; }
             }
 
             CheckResult checkResult = new CheckResult(true, newBookList, operationType);
@@ -51,8 +58,8 @@ public class Check {
         }
     }
 
-    private Boolean checkIfAvailableBook(Book book) {
-        return book.getStatus() == "available";
+    private Boolean checkBookStatus(Book book, String statusToCheck) {
+        return book.getStatus() == statusToCheck;
     }
 }
 
